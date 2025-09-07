@@ -1,0 +1,20 @@
+### Build ###
+/target/
+!/src/main/
+/.mvn/
+!.mvn/wrapper/maven-wrapper.jar
+
+### Spring Boot sensitive configs ###
+application.properties
+application.yml
+
+### Logs ###
+*.log
+
+### IntelliJ IDEA ###
+.idea/
+*.iml
+
+### OS files ###
+.DS_Store
+Thumbs.db
