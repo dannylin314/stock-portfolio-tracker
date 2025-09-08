@@ -1,6 +1,7 @@
 package com.danny.stocktracker.service;
 
 import com.danny.stocktracker.client.StockClient;
+import com.danny.stocktracker.domain.dto.AlphaVantageResponse;
 import com.danny.stocktracker.domain.dto.StockResponse;
 import org.springframework.stereotype.Service;
 
@@ -14,8 +15,12 @@ public class StockService {
     }
 
     public StockResponse getStockForSymbol(final String stockSymbol) {
-        stockClient.getStockQuote(stockSymbol);
+        AlphaVantageResponse response = stockClient.getStockQuote(stockSymbol);
 
-        return new StockResponse();
+        return StockResponse.builder()
+                .symbol(response.globalQuote().symbol())
+                .price(Double.parseDouble(response.globalQuote().price()))
+                .lastUpdated(response.globalQuote().lastTradingDay())
+                .build();
     }
 }

@@ -1,4 +1,11 @@
 package com.danny.stocktracker.domain.dto;
 
-public record StockResponse() {
+import lombok.Builder;
+
+@Builder
+public record StockResponse(
+        String symbol,
+        double price,
+        String lastUpdated
+) {
 }
