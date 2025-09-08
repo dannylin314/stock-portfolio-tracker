@@ -2,7 +2,7 @@ package com.danny.stocktracker.client;
 
 import com.danny.stocktracker.domain.dto.StockResponse;
 import lombok.RequiredArgsConstructor;
-import lombok.Value;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 
