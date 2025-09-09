@@ -1,7 +1,8 @@
 package com.danny.stocktracker.client;
 
 import com.danny.stocktracker.domain.dto.AlphaVantageResponse;
-import com.danny.stocktracker.domain.dto.StockResponse;
+import com.danny.stocktracker.domain.dto.StockHistoryResponse;
+import com.danny.stocktracker.domain.dto.StockOverviewResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -25,5 +26,30 @@ public class StockClient {
                 .retrieve()
                 .bodyToMono(AlphaVantageResponse.class)
                 .block();
+    }
+
+    public StockOverviewResponse getStockOverview(String symbol) {
+        return webClient.get()
+                .uri(uriBuilder -> uriBuilder
+                        .queryParam("function", "OVERVIEW")
+                        .queryParam("symbol", symbol)
+                        .queryParam("apikey", apiKey)
+                        .build())
+                .retrieve()
+                .bodyToMono(StockOverviewResponse.class)
+                .block();
+    }
+
+    public StockHistoryResponse getStockHistory(String symbol) {
+        return webClient.get()
+                .uri(uriBuilder -> uriBuilder
+                        .queryParam("function", "TIME_SERIES_DAILY")
+                        .queryParam("symbol", symbol)
+                        .queryParam("apikey", apiKey)
+                        .build())
+                .retrieve()
+                .bodyToMono(StockHistoryResponse.class)
+                .block();
+
     }
 }
